@@ -67,6 +67,8 @@ def generate_schedule(workers, projects):
                 if worker.aspect == aspect:
                     scheduled_workers[aspect].append(worker)
 
+        current_date = project.start_date
+
         while current_date <= project.end_date:
             if current_date.weekday() < 5:  # Monday to Friday
                 date_str = current_date.strftime('%m/%d/%Y')
