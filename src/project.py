@@ -56,5 +56,16 @@ def main():
         else:
             print("Invalid choice! Please try again.")
 
+def generate_schedule(workers, projects):
+    pipeline_order = ['modeling', 'rigging', 'surfacing', 'layout', 'animation', 'cfx', 'matte painting', 'lighting', 'sound design']
+    schedule_data = []
+
+    for project in projects:
+        scheduled_workers = {aspect: [] for aspect in pipeline_order}
+        for aspect in pipeline_order:
+            for worker in workers:
+                if worker.aspect == aspect:
+                    scheduled_workers[aspect].append(worker)
+
 if __name__ == "__main__":
     main()
