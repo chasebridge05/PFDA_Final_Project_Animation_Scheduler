@@ -13,6 +13,22 @@ class Project:
         self.start_date = start_date
         self.end_date = end_date
 
+def add_worker():
+    name = input("Enter worker's name: ")
+    availability = float(input("Enter worker's availability in hours per week: "))
+    aspect = input("Enter the aspect of the animation pipeline: ")
+    worker = Worker(name, availability, aspect)
+    return worker
+
+def add_project():
+    name = input("Enter project name: ")
+    start_date = input("Enter project start date (MM/DD/YYYY): ")
+    end_date = input("Enter project end date (MM/DD/YYYY): ")
+    start_date = datetime.strptime(start_date, "%m/%d/%Y")
+    end_date = datetime.strptime(end_date, "%m/%d/%Y")
+    project = Project(name, start_date, end_date)
+    return project
+
 def main():
     workers = []
     projects = []
