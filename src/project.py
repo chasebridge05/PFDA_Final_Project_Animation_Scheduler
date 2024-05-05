@@ -67,5 +67,9 @@ def generate_schedule(workers, projects):
                 if worker.aspect == aspect:
                     scheduled_workers[aspect].append(worker)
 
+    df = pd.DataFrame(schedule_data)
+    df.to_csv('schedule.csv', index=False)
+    print("Schedule generated and saved as 'schedule.csv'.")
+
 if __name__ == "__main__":
     main()
