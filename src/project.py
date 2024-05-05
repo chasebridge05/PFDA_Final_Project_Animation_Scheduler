@@ -67,6 +67,22 @@ def generate_schedule(workers, projects):
                 if worker.aspect == aspect:
                     scheduled_workers[aspect].append(worker)
 
+        while current_date <= project.end_date:
+            if current_date.weekday() < 5:  # Monday to Friday
+                date_str = current_date.strftime('%m/%d/%Y')
+                schedule_row = {'Date': date_str, 'Project': project.name}
+                for aspect in pipeline_order:
+                    aspect_workers = scheduled_workers[aspect]
+                    workers_str = ""
+                    for worker in aspect_workers:
+                        if worker.aspect == 'writer' or worker.aspect == 'director':
+                            workers_str += f"{worker.name} (Full time), "
+                        else:
+                            workers_str += f"{worker.name} ({worker.availability} hours/week), "
+                    schedule_row[aspect] = workers_str
+                schedule_data.append(schedule_row)
+            current_date += timedelta(days=1)
+
     df = pd.DataFrame(schedule_data)
     df.to_csv('schedule.csv', index=False)
     print("Schedule generated and saved as 'schedule.csv'.")
